@@ -1,2 +1,2 @@
 # mynote
-上课的笔记，markdown格式
+上课的笔记，markdown格式。
