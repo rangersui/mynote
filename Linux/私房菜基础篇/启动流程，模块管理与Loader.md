@@ -193,7 +193,7 @@ systemctl list-dependencies basic.target
 - 加载alsa音效驱动程序
 - 加载firewalled防火墙（CentOS）
 - 加载CPU的微指令功能
-- 启动预设值SELinux的安全上下文（CentOS）
+- 启动预设值SELinux的安全上下文
 - 将目前启动过程产生的启动信息写入到/var/log/dmesg中
 - 由/etc/sysconfig/modules/*.modules及/etc/rc.modules加载管理员指定的模块
 - 加载systemd支持的timer功能
