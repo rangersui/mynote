@@ -301,7 +301,7 @@ void example()
 
 ### 特殊函数声明
 
-GNU C允许声明函数，变量和类型的特殊属性，一边手动优化代码和定制代码检查的方法。要指定一个声明的属性，只需要在声明后面添加\_\_attribute\_\_，其中ATTRIBUTE为属性说明，如果存在多个属性，则以都好风格。GNU C支持noreturn，format，section，aligned，packed等十多个属性。
+GNU C允许声明函数，变量和类型的特殊属性，一边手动优化代码和定制代码检查的方法。要指定一个声明的属性，只需要在声明后面添加\_\_attribute\_\_，其中ATTRIBUTE为属性说明，如果存在多个属性，则以逗号分隔。GNU C支持noreturn，format，section，aligned，packed等十多个属性。
 
 #### noreturn属性
 
