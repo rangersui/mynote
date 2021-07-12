@@ -10,8 +10,6 @@
 
 和上一次的玩具bootloader一样，这个也不是严格意义的内核，不过翻译完这么一篇文章配合一下实践，让我对内核启动方面有了更深入的了解。
 
-qemu模拟成功工作并且达到预期的效果，但是很遗憾的是我的linux虚拟机本身并不能跑起来这个内核并且提示Invalid Magic Number，如果有知道是为什么的希望可以指导一下。
-
 # 开始
 
 实现一个由GRUB加载的x86操作系统，这个操作系统只会在屏幕上显示一条信息然后停机。
@@ -283,9 +281,21 @@ To **add** a **new kernel** to grub2:
 1. Move your **kernel** to /boot/
 2. Run sudo update-**grub**.
 
+然后进入管理员模式`sudo -i`手动编辑vim /boot/grub/grub.cfg
+
+请注意手动编辑grub.cfg是非常危险的行为，请在虚拟机进行！
+
+通过`/<kernel version>`查找你的内核所在的位置，然后删除大括号内`update-grub`自动编写的一大堆东西，保留以下两条内容
+```
+menuentry 'kernel 101' {
+	set root='hd0,msdos1'
+	multiboot /boot/kernel-701 ro
+}
+```
+
 ## Invalid Magic Number
 
-如果遇到这个问题，先不要慌，打开advanced options for ubuntu，选择一个正常工作的内核即可。
+如果遇到这个问题，先不要慌，打开advanced options for ubuntu，选择一个正常工作的内核即可。(你自己编写的内核可能也需要通过这个方法进入，似乎不能自动加载)
 
 ## qemu
 
