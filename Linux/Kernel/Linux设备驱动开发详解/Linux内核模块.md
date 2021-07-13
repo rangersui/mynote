@@ -51,7 +51,7 @@ clean:
 
 ```
 
--C /lib/modules/$(KVERS)/build 指明**跳转到内核源码目录下读取那里的Makefile**；M=$(PWD) 表明然后返回到当前目录继续读入、执行当前的Makefile。其中M不是makefile的选项，是内核根目录下的Makefile中使用的变量。
+-C /lib/modules/\$(KVERS)/build 指明**跳转到内核源码目录下读取那里的Makefile**；M=\$(PWD) 表明然后返回到当前目录继续读入、执行当前的Makefile。其中M不是makefile的选项，是内核根目录下的Makefile中使用的变量。
 
 #### 参考
 
