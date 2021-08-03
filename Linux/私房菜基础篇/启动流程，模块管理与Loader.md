@@ -2,6 +2,12 @@
 
 [toc]
 
+# 查看启动流程
+
+```bash
+dmesg
+```
+
 # Linux启动流程
 
 启动的过程中启动引导程序（Boot loader）使用的软件可能不一样，目前各大发行版采用grub2，早期使用grub或LILO。
