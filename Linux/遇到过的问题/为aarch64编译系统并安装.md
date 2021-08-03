@@ -58,3 +58,21 @@ dd if=/dev/zero of=100M.img bs=1M count=100
 # 创建一个空的100M的镜像文件100M.img,100M.img数据全为0
 ```
 
+## 在U-boot下替换内核
+
+uboot下直接用mmc write 替换 boot.img
+新文件: new.img (22419456 Bytes)
+MMC分区信息如下: 
+mmcblk0:6M(reserved),1M(env),20M(mboot),180M(reserved_data),48M(recoveryA),48M(recoveryB),48M(boot),64M(protected),64M(factory),768M(system),256M(cast),512M(cache),1632M(data),-(reserved); mmcblk0boot0:512K(uboot),64K(mcu),4k(configs),-(reserved);mmcblk0boot1:512K(uboot),64K(mcu),4k(configs),-(reserved) with_armor
+要替换的boot image位于mmcblk0p7: 48M(boot)
+计算偏移量 6+1+20+180+48+48=303MB=317718528 Bytes = 620544 Blocks(512Bytes/Block) = 97800 (hex offset)
+计算Block Count (基于new.img) 22419456 Bytes = 43788 Blocks (512Bytes/Block) = AB0C (hex count)
+
+reboot进入uboot: xxx-EMMC#
+mmc dev 0 0 #准备写入user partition
+dcache off
+usb start
+fatload usb 0 8000000 new.img #从USB设备0读入new.img到内存0x8000000
+mmc write 8000000 97800 AB0C #在offset 303M处写入new.img
+mmc write 8000000 97800 F5D0 #在offset 303M处写入new.img
+
