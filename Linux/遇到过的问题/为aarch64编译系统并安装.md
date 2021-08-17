@@ -81,6 +81,6 @@ mmc dev 0 0 #准备写入user partition
 dcache off
 usb start
 fatload usb 0 8000000 new.img #从USB设备0读入new.img到内存0x8000000
-mmc write 8000000 97800 AB0C #在offset 303M处写入new.img
-mmc write 8000000 97800 F5D0 #在offset 303M处写入new.img
+mmc write 8000000 7B800 A3C5 #在offset M处写入new.img
 ```
+
