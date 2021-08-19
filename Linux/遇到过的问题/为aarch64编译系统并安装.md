@@ -80,7 +80,7 @@ reboot进入uboot: xxx-EMMC#
 mmc dev 0 0 #准备写入user partition
 dcache off
 usb start
-fatload usb 0 8000000 new.img #从USB设备0读入new.img到内存0x8000000
+fatload usb 0 8000000 safe-kernel.img1 #从USB设备0读入到内存0x8000000
 mmc write 8000000 7B800 A3C5 #在offset M处写入new.img
 ```
 
