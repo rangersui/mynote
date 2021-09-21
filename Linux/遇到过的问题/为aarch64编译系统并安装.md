@@ -24,7 +24,7 @@ make ARCH=arm64 Image dtbs
 编译结果为：
 
 - linux-source/arch/arm64/boot/Image （内核可执行文件）
-- linux-source/arch/arm64/boot/dts/trix/sigma-union-evb.dtb （设备树二进制文件）
+- linux-source/arch/arm64/boot/dts/xxx/xxx.dtb （设备树二进制文件）
 
 然后把flashmastr-src解压，把编译好的Image和dtb放到Res/xxx/kernel/EMMC下，Image重命名为vmlinux.bin
 
@@ -66,7 +66,7 @@ uboot下直接用mmc write 替换 boot.img
 
 MMC分区信息如下: 
 
-mmcblk0:6M(reserved),1M(env),20M(mboot),180M(reserved_data),48M(recoveryA),48M(recoveryB),48M(boot),64M(protected),64M(factory),768M(system),256M(cast),512M(cache),1632M(data),-(reserved); mmcblk0boot0:512K(uboot),64K(mcu),4k(configs),-(reserved);mmcblk0boot1:512K(uboot),64K(mcu),4k(configs),-(reserved) with_armor
+mmcblk0:6M(reserved),1M(env),20M(mboot),180M(reserved_data),48M(recoveryA),48M(recoveryB),**48M(boot)** ...
 
 要替换的boot image位于mmcblk0p7: 48M(boot)
 
@@ -80,7 +80,7 @@ reboot进入uboot: xxx-EMMC#
 mmc dev 0 0 #准备写入user partition
 dcache off
 usb start
-fatload usb 0 8000000 safe-kernel.img1 #从USB设备0读入到内存0x8000000
-mmc write 8000000 7B800 A3C5 #在offset M处写入new.img
+fatload usb 0 8000000 kernel.img #从USB设备0读入到内存0x8000000
+mmc write 8000000 7B800 A3C5 #在offset M处写入kernel.img
 ```
 
