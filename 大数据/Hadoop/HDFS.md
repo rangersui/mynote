@@ -71,6 +71,8 @@ public class HdfsClient{
         URI uri = new URI("hdfs://hadoop102:8020");
         //创建配置文件
         Configuration configuration  = new Configuration();
+        // 设置拷贝为两份
+        configuration.set("dfs.replication","2")
         //用户
         String user = "user";
 
@@ -84,8 +86,38 @@ public class HdfsClient{
 
     @Test
     public void testmkdir(){
-
         fs. mkdirs(new Path("/test/"));
+    }
+    /**
+    * 参数优先级
+    * hdfs-default.xml < hdfs-site.xml < 项目资源目录下的配置文件 < 代码配置
+    **/
+
+    @Test
+    public void testPut() throws IOException{
+        // 删除原数据，是否允许覆盖，原数据路径，目的数据路径
+        fs.copyFromLocalFile(true,true,new Path("D:/test.txt"),new Path("hdfs://hadoop102/xiyou/huaguoshan"));
+    }
+
+    @Test
+    public void testGet() throws IOException{
+        // 原文件是否删除，源文件路径，目标地址路径，是否使用本地文件系统
+        fs.copyToLocalFile(false,new Path("hdfs://hadoop102/xiyou/huaguoshan"),new Path("D:\\sunwukong.txt"),true);
+    }
+    
+    @Test
+    public void testRm() throws IOException{
+        //目录路径，是否递归删除
+        fs.delete(new Path("/xiyou"),true);
+    }
+
+    @Test
+    public void fileDetail()throws IOException{
+        RemoteIterator<LocatedFileStatus> listFiles = fs.listFiles(new Path("/"),true);
+        while(listFiles.hasNext()){
+            LocatedFileStatus fileStatus = listFiles.next();
+            System.out.println(fileStatus.getPath());
+        }
     }
 }
 ```
